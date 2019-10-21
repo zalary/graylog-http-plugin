@@ -90,12 +90,11 @@ public class HttpOutput implements MessageOutput {
 			RequestBody body = RequestBody.create(JSON, gson.toJson(data));
 			Request request = new Request.Builder().url(url).post(body).build();
 			Response response = client.newCall(request).execute();
+			response.close();
 			if (response.code() != 200) {
 				LOG.info("Unexpected HTTP response status " + response.code());
 				throw new HttpOutputException("Unexpected HTTP response status " + response.code());
 			}
-			response.close();
-
 		} catch (IOException e) {
 			LOG.info("Error while posting the stream data to the given API", e);
             throw new HttpOutputException("Error while posting stream to HTTP.", e);
