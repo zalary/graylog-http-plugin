@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Implement the PluginMetaData interface here.
  */
-public class HttpOutputMetaData implements PluginMetaData {
+public class HumioHttpMetaData implements PluginMetaData {
     private static final String PLUGIN_PROPERTIES = "com.plugin.graylog-plugin-humio-http/graylog-plugin.properties";
 
     @Override

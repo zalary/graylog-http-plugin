@@ -10,7 +10,7 @@ import java.util.Collections;
 /**
  * Implement the Plugin interface here.
  */
-public class HttpOutputPlugin implements Plugin {
+public class HumioHttpPlugin implements Plugin {
     @Override
     public PluginMetaData metadata() {
         return new HumioHttpMetaData();
