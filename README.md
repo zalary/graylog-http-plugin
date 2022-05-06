@@ -13,7 +13,7 @@ This project is using Maven 3 and requires Java 8 or higher.
 
 Installation
 ------------
-[Download the plugin](https://github.com/zalary/graylog-http-plugin)
+[Download the plugin](https://github.com/zalary`/graylog-http-plugin)
 
 * Clone this repository.
 * Run `mvn package` to build a JAR file.
