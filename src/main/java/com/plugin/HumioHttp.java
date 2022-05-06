@@ -40,7 +40,7 @@ public class HumioHttp implements MessageOutput {
 	@Inject
 	public HumioHttp(@Assisted Stream stream, @Assisted Configuration conf) throws HumioHttpException {
 
-		url = conf.getString(CK_OUTPUT_API);
+		url = "https://cloud.us.humio.com/api/v1/ingest/raw/" + conf.getString(CK_OUTPUT_API);
 		shutdown = false;
 		LOG.info(" Humio Http Plugin has been configured with the following parameters:");
 		LOG.info(CK_OUTPUT_API + " : " + url);
@@ -123,8 +123,8 @@ public class HumioHttp implements MessageOutput {
 		@Override
 		public ConfigurationRequest getRequestedConfiguration() {
 			final ConfigurationRequest configurationRequest = new ConfigurationRequest();
-			configurationRequest.addField(new TextField(CK_OUTPUT_API, "API to forward the stream data.", "/",
-					"HTTP address where the stream data to be sent.", ConfigurationField.Optional.NOT_OPTIONAL));
+			configurationRequest.addField(new TextField(CK_OUTPUT_API, "Humio Ingest Token", "/",
+					"https://library.humio.com/cloud/docs/ingesting-data/ingest-tokens/", ConfigurationField.Optional.NOT_OPTIONAL));
 
 			return configurationRequest;
 		}
