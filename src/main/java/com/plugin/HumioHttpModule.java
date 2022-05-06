@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Extend the PluginModule abstract class here to add you plugin to the system.
  */
-public class HttpOutputModule extends PluginModule {
+public class HumioHttpModule extends PluginModule {
     /**
      * Returns all configuration beans required by this plugin.
      *
@@ -46,6 +46,6 @@ public class HttpOutputModule extends PluginModule {
          */
 
         MapBinder<String, Factory<? extends MessageOutput>> outputMapBinder = outputsMapBinder();
-        installOutput(outputMapBinder, HttpOutput.class, HttpOutput.Factory.class);
+        installOutput(outputMapBinder, HumioHttp.class, HumioHttp.Factory.class);
     }
 }

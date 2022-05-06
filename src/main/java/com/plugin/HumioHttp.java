@@ -30,26 +30,26 @@ import okhttp3.Response;
  * This is the plugin. Your class should implement one of the existing plugin
  * interfaces. (i.e. AlarmCallback, MessageInput, MessageOutput)
  */
-public class HttpOutput implements MessageOutput {
+public class HumioHttp implements MessageOutput {
 
 	private boolean shutdown;
 	private String url;
 	private static final String CK_OUTPUT_API = "output_api";
-	private static final Logger LOG = LoggerFactory.getLogger(HttpOutput.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HumioHttp.class);
 
 	@Inject
-	public HttpOutput(@Assisted Stream stream, @Assisted Configuration conf) throws HttpOutputException {
+	public HumioHttp(@Assisted Stream stream, @Assisted Configuration conf) throws HumioHttpException {
 
 		url = conf.getString(CK_OUTPUT_API);
 		shutdown = false;
-		LOG.info(" Http Output Plugin has been configured with the following parameters:");
+		LOG.info(" Humio Http Plugin has been configured with the following parameters:");
 		LOG.info(CK_OUTPUT_API + " : " + url);
 		
 		try {
             final URL urlTest = new URL(url);
         } catch (MalformedURLException e) {
         	LOG.info("Error in the given API", e);
-            throw new HttpOutputException("Error while constructing the API.", e);
+            throw new HumioHttpException("Error while constructing the API.", e);
         }
 	}
 
@@ -80,7 +80,7 @@ public class HttpOutput implements MessageOutput {
 		writeBuffer(msg.getFields());
 	}
 
-	public void writeBuffer(Map<String, Object> data) throws HttpOutputException {
+	public void writeBuffer(Map<String, Object> data) throws HumioHttpException {
 		OkHttpClient client = new OkHttpClient();
 		Gson gson = new Gson();
 
@@ -93,18 +93,18 @@ public class HttpOutput implements MessageOutput {
 			response.close();
 			if (response.code() != 200) {
 				LOG.info("Unexpected HTTP response status " + response.code());
-				throw new HttpOutputException("Unexpected HTTP response status " + response.code());
+				throw new HumioHttpException("Unexpected HTTP response status " + response.code());
 			}
 		} catch (IOException e) {
 			LOG.info("Error while posting the stream data to the given API", e);
-            throw new HttpOutputException("Error while posting stream to HTTP.", e);
+            throw new HumioHttpException("Error while posting stream to HTTP.", e);
 		}
 
 	}
 
-	public interface Factory extends MessageOutput.Factory<HttpOutput> {
+	public interface Factory extends MessageOutput.Factory<HumioHttp> {
 		@Override
-		HttpOutput create(Stream stream, Configuration configuration);
+		HumioHttp create(Stream stream, Configuration configuration);
 
 		@Override
 		Config getConfig();
@@ -115,7 +115,7 @@ public class HttpOutput implements MessageOutput {
 
 	public static class Descriptor extends MessageOutput.Descriptor {
 		public Descriptor() {
-			super("HttpOutput Output", false, "", "Forwards stream to HTTP.");
+			super("HumioHumio Http", false, "", "Forwards stream to HTTP.");
 		}
 	}
 
@@ -130,15 +130,15 @@ public class HttpOutput implements MessageOutput {
 		}
 	}
 
-	public class HttpOutputException extends Exception {
+	public class HumioHttpException extends Exception {
 
 		private static final long serialVersionUID = -5301266791901423492L;
 
-		public HttpOutputException(String msg) {
+		public HumioHttpException(String msg) {
             super(msg);
         }
 
-        public HttpOutputException(String msg, Throwable cause) {
+        public HumioHttpException(String msg, Throwable cause) {
             super(msg, cause);
         }
 

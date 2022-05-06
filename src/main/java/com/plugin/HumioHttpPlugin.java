@@ -13,11 +13,11 @@ import java.util.Collections;
 public class HttpOutputPlugin implements Plugin {
     @Override
     public PluginMetaData metadata() {
-        return new HttpOutputMetaData();
+        return new HumioHttpMetaData();
     }
 
     @Override
     public Collection<PluginModule> modules () {
-        return Collections.<PluginModule>singletonList(new HttpOutputModule());
+        return Collections.<PluginModule>singletonList(new HumioHttpModule());
     }
 }

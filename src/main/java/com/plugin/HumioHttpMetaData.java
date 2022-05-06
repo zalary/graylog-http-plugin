@@ -12,26 +12,26 @@ import java.util.Set;
  * Implement the PluginMetaData interface here.
  */
 public class HttpOutputMetaData implements PluginMetaData {
-    private static final String PLUGIN_PROPERTIES = "com.plugin.graylog-plugin-http-output/graylog-plugin.properties";
+    private static final String PLUGIN_PROPERTIES = "com.plugin.graylog-plugin-humio-http/graylog-plugin.properties";
 
     @Override
     public String getUniqueId() {
-        return "com.plugin.HttpOutputPlugin";
+        return "com.plugin.HumioHttpPlugin";
     }
 
     @Override
     public String getName() {
-        return "HttpOutput";
+        return "Humio Raw Ingest HTTP Plugin";
     }
 
     @Override
     public String getAuthor() {
-        return "Sagar Revanna <sagarinpursue@gmail.com>";
+        return "Zalary Young <zalary@gmail.com>";
     }
 
     @Override
     public URI getURL() {
-        return URI.create("https://github.com/sagarinpursue/graylog-http-plugin");
+        return URI.create("https://github.com/zalary/graylog-http-plugin");
     }
 
     @Override
@@ -41,7 +41,7 @@ public class HttpOutputMetaData implements PluginMetaData {
 
     @Override
     public String getDescription() {
-        return "Graylog plugin to post Stream data to HTTP.";
+        return "Graylog plugin to post Stream data to Humio via HTTP.";
     }
 
     @Override
